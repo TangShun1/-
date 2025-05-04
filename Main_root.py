@@ -1,37 +1,48 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, simpledialog
+import pyperclip
+import AI_module
+from Screen import SimpleRegionSelector
 
 #主窗口
 root = tk.Tk()
 root.title('答题软件')
-root.geometry('375x110')
-
-
+selector = SimpleRegionSelector()
+ai=AI_module.Ai()
 # 定义每个按钮的功能
 def select_area():
-    messagebox.showinfo("提示", "请选择区域")
 
+    selector.select_region(root)  # 选择区域
+    print('yes')
 
 def ai_answer():
-    messagebox.showinfo("提示", "AI作答")
-
+    pm_content=selector.get_text()
+    if not pm_content:
+        messagebox.showinfo("提醒","请先选择屏幕区域")
+        return
+    res=ai.get_answer(pm_content)
+    messagebox.showinfo("AI_解答",res)
 
 def ai_chat():
-    messagebox.showinfo("提示", "AI对话")
-
+    user_input = simpledialog.askstring(
+        title="AI_聊天",
+        prompt="输入你的问题："
+    )
+    messagebox.showinfo("AI_回复", ai.get_answer(user_input))
 
 def copy_text():
-    messagebox.showinfo("提示", "复制文字")
-
+    pm_content = selector.get_text()
+    if not pm_content:
+        messagebox.showinfo("提醒", "请先选择屏幕区域")
+        return
+    pyperclip.copy(pm_content)
+    messagebox.showinfo("提示", "复制成功")
 
 def transparency():
     root1 = tk.Toplevel(root)
     root1.title('设置窗口透明度')
-    root1.geometry('300x120')
-
     label = tk.Label(root1, text='请选择窗口透明度（0-100）')
     label.place(x=80, y=10)
-
     #透明度进度条范围
     scale = tk.Scale(root1, from_=0, to=100, orient='horizontal')  #水平滑动
     scale.set(0)
@@ -50,7 +61,6 @@ def transparency():
 def size():
     root2 = tk.Toplevel(root)
     root2.title('设置窗口大小')
-    root2.geometry('300x150')
 
     label1 = (tk.Label(root2, text="宽度 (200~800)"))
     label1.place(x=30, y=20)

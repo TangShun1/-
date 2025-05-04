@@ -18,13 +18,13 @@ class OCR:
         response = requests.get(url)
         return response.json().get("access_token")
 
-    def image_to_text(self, image_path: str) -> str:  # 图片转文字
+    def image_to_text(self, image_64) -> str:  # 图片转文字
         try:
             access_token = self.get_access_token()
             url = f"{self.ocr_url}?access_token={access_token}"
             headers = {'Content-Type': 'application/x-www-form-urlencoded'}
             data = {
-                'image': self.image_to_base64(image_path)
+                'image': image_64
             }
             response = requests.post(url, headers=headers, data=data)
             result = response.json()
