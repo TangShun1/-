@@ -29,7 +29,7 @@ def guide():
 
 
 def more():
-    messagebox.showinfo("提示", "更多功能")
+    messagebox.showinfo("提示", "更多功能111111111111")
 
 
 #按钮布置
