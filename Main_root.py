@@ -46,5 +46,4 @@ for index, (text, command) in enumerate(buttons):
     col = index % 3
     btn = tk.Button(root, text=text, width=15, height=2, command=command)
     btn.grid(row=row, column=col, padx=5, pady=5)
-    # 测试 lkt
 root.mainloop()
