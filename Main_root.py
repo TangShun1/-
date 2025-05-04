@@ -7,13 +7,12 @@ from Screen import SimpleRegionSelector
 #主窗口
 root = tk.Tk()
 root.title('答题软件')
+root.attributes('-topmost', 1)  # 强制置顶
 selector = SimpleRegionSelector()
 ai=AI_module.Ai()
 # 定义每个按钮的功能
 def select_area():
-
     selector.select_region(root)  # 选择区域
-    print('yes')
 
 def ai_answer():
     pm_content=selector.get_text()
