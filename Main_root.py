@@ -5,7 +5,7 @@ from tkinter import messagebox
 root = tk.Tk()
 root.title('答题软件')
 root.geometry('380x120')
-
+print('测试')
 
 # 定义每个按钮的功能
 def select_area():
@@ -58,7 +58,7 @@ buttons = [
     ("AI对话", ai_chat),
     ("复制文字", copy_text),
     ("透明度", transparency),
-    ("窗口大小", size)
+    ("窗口大小(test)", size)
 ]
 for index, (text, command) in enumerate(buttons):
     row = index // 3
